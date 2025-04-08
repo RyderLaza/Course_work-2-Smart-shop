@@ -1,2 +1,3 @@
-# Course_work-2-Smart-shop
-We upload all of our progress onto this repository
+▪ How to run the application - 
+▪ Prerequisites (e.g., Java version, required libraries) -
+▪ Key features implemented - 
