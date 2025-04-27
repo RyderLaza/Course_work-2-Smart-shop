@@ -1,17 +1,32 @@
-import java.util.*;
+/*
+This is the main class for the Smart Shop Management System.
+It contains the main classes and methods for managing products, sales, and inventory.
 
-//Product
+Authors:
+Di’light Sarah Olisah – 26117363, Charlie Ryder - 26186781, Harley Webster – 26084678
+Josh Bell - 26174804, Paul Nyamwela - 26126796, Dylan Clarke - 26115999
+
+Date: 25/04/2025
+Programming 2 - Coursework 2 - Group Project - Smart Shop Management System
+*/
+
+import java.util.*; // importing the java util package for using arrays and other data structures
+
+//Product class
 class Product {
-    public String name;
-    public double price;
-    public int stock;
+    public String name; //product name
+    public double price; // product price
+    public int stock; // product stock
 
-    public Product(String name, double price, int stock) { //product constructor
-        this.name = name; //sets the atributes of the class with the given parameters
+    //product constructor
+    public Product(String name, double price, int stock) {
+        // sets the attributes of the class with the given parameters
+        this.name = name;
         this.price = price;
         this.stock = stock;
     }
 
+    //getters for the attributes
     public String getName() {
         return this.name;
     }
@@ -21,11 +36,13 @@ class Product {
     public int getStock() {
         return this.stock;
     }
-}
-//sales manager
+} // end of product class
+
+// sales manager class
 class SalesManager {
-    public SalesRecord[] salesRecords;
-    public int index;
+
+    public SalesRecord[] salesRecords; // array of sales records
+    public int index; // index for the sales records
 
     public SalesManager() {
         salesRecords = new SalesRecord[100]; //assumes only 100 sales records can be made for now will fix later
@@ -43,24 +60,27 @@ class SalesManager {
 
 }
 
-//sales record
+//sales record class
 class SalesRecord {
     public Product[] products;
     public String date;
     public int[] quantitySold;
     public double totalPrice;
 
+    // constructor for sales record
     public SalesRecord(Product[] products, String date, int[] quantity) {
         this.products = products;//sets up the atributes with parameters
         this.date = date;
         this.quantitySold = quantity;
         this.totalPrice = 0;
-        for (int i = 0; i < products.length; i++) {//works out the total price upon initialisation
+
+        for (int i = 0; i < products.length; i++) {
+            //works out the total price upon initialisation
             this.totalPrice += this.products[i].getPrice()*this.quantitySold[i];
         }
 
     }
-
+    //getters for the attributes
     public Product[] getProducts() {
         return this.products;
     }
@@ -68,14 +88,15 @@ class SalesRecord {
         return this.date;
     }
     public double getTotalPrice() {
-       return this.totalPrice;
+        return this.totalPrice;
     }
-}
+} // end of sales record class
 
-//inventory manager
+//inventory manager class
 class InventoryManager {
-    Product[] products = new Product[1];
+    Product[] products = new Product[1]; //initialises the product list to a size of 1
 
+    // constructor for inventory manager
     public InventoryManager(Product[] products) {
         this.products = products;
     }
@@ -91,6 +112,7 @@ class InventoryManager {
         return false;
     }
 
+    // Method to add a product to the inventory
     public void addProduct(Product product) {
         Product[] tempList = this.products;
         this.products = new Product[tempList.length + 1];
@@ -100,6 +122,7 @@ class InventoryManager {
         this.products[this.products.length-1] = product;
     }
 
+    // Method to remove a product from the inventory
     public void removeProduct(Product product) {
         Product[] tempList = this.products;
         this.products = new Product[tempList.length - 1];
@@ -111,12 +134,10 @@ class InventoryManager {
             }
         }
     }
-}
+} // end of inventory manager class
 
 
-
-
-
+// Main class to run the program
 public class Main {
     public static void main(String[] args) {
 
@@ -130,4 +151,4 @@ public class Main {
         inventory.removeProduct(banana);
         System.out.println(Arrays.toString(inventory.products));
     }
-}
+} // end main class
