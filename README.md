@@ -4,6 +4,7 @@ It allows users to add, update, and remove products, record sales transactions, 
 The GUI follows usability principles, providing clear prompts, intuitive navigation, and feedback to ensure a smooth user experience.
 
 The code was created in a collaborative enviroment of 6 people which are:
+
 Di’light Sarah Olisah – 26117363 (Project manager)
 Charlie Ryder - 26186781 (Document lead)
 Harley Webster – 26084678 (Designer) 
