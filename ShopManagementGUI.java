@@ -1,4 +1,4 @@
-/* 
+/*
 ------------------------------------------------------------
 Smart Shop Management System
 Programming 2 - Coursework 2 - Group Project
@@ -14,9 +14,11 @@ Authors:
 Date: 25/04/2025
 
 Description:
-This file 
+This file contain Java Swing components and it is the GUI of the
+Smart Shop system
 ------------------------------------------------------------
-*
+*/
+
 import javax.swing.*; // this is imported for GUI components
 import java.awt.event.*; // this is imported to handle events
 import java.util.ArrayList; // this is imported to use the array list class
