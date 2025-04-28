@@ -1,3 +1,24 @@
+/*
+------------------------------------------------------------
+Smart Shop Management System
+Programming 2 - Coursework 2 - Group Project
+
+Authors:
+- Di’light Sarah Olisah – 26117363
+- Charlie Ryder – 26186781
+- Harley Webster – 26084678
+- Josh Bell – 26174804
+- Paul Nyamwela – 26126796
+- Dylan Clarke – 26115999
+
+Date: 25/04/2025
+
+Description:
+This file contains Java Swing components and it is the GUI of the
+Smart Shop system
+------------------------------------------------------------
+*/
+
 import javax.swing.*; // this is imported for GUI components
 import java.awt.event.*; // this is imported to handle events
 import java.util.ArrayList; // this is imported to use the array list class
@@ -43,7 +64,7 @@ public class ShopManagementGUI {
         exitButton.addActionListener(e -> frame.dispose());
     }
 
-    // This creats a method to manage the products within the application (add, view, and remove products)
+    // This creates a method to manage the products within the application (add, view, and remove products)
      static void manageProducts() {
     String[] options = {"Add Product", "View Inventory", "Remove Product", "Back"};
     // This creates a dialog box to allow the options to be displayed to the user
