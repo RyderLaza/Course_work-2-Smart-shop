@@ -19,74 +19,90 @@ Smart Shop system
 ------------------------------------------------------------
 */
 
-
-import javax.swing.*; // this is imported for GUI components
-import javax.swing.table.DefaultTableModel; // this is imported for table models
-import java.awt.*; // this is imported for layout managers
-import java.awt.event.*; // this is imported to handle events
-import java.util.ArrayList; // this is imported to use the array list class
+import javax.swing.*; // GUI components
+import javax.swing.table.DefaultTableModel; // Table models
+import java.awt.*; // Layout and color handling
+import java.awt.event.*; // Event handling
+import java.util.ArrayList; // ArrayList for dynamic lists
 
 public class ShopManagementGUI {
-    // These are the static variables that are utilized throughout the GUI code
+    // Shared static instances of management components
     static InventoryManager inventory = new InventoryManager(new Product[]{});
     static SalesManager salesManager = new SalesManager();
-    static InventoryWindow inventoryWindow = new InventoryWindow(); // This creates a separate window to view inventory
+    static InventoryWindow inventoryWindow = new InventoryWindow(); // Inventory view window
 
     public static void main(String[] args) {
-        // This is to set up the main GUI frame
+        // Set up the main frame
         JFrame frame = new JFrame("Shop Management System");
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridBagLayout());
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(null); // Center the window
 
+        // GridBagLayout constraints for layout management
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.BOTH; // This sets the fill property for the grid bag constraints
-        gbc.insets = new Insets(15, 40, 15, 40); // This sets the insets for the grid bag constraints
-        gbc.gridx = 0; // This sets the grid x position for the grid bag constraints
-        gbc.weightx = 1.0; // This sets the weight x for the grid bag constraints
-        gbc.weighty = 0.1; // This sets the weight y for the grid bag constraints
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(15, 40, 15, 40);
+        gbc.gridx = 0;
+        gbc.weightx = 1.0;
 
-        Font buttonFont = new Font("Roboto", Font.BOLD, 18); // This creates a font for the buttons
+        // Fonts
+        Font titleFont = new Font("Roboto", Font.BOLD, 24);
+        Font instructionFont = new Font("Roboto", Font.PLAIN, 14);
+        Font buttonFont = new Font("Roboto", Font.BOLD, 18);
 
-        // This is to create the manage products button within the application
+        // Heading label
+        JLabel headingLabel = new JLabel("Smart Shop Management System", SwingConstants.CENTER);
+        headingLabel.setFont(titleFont);
+        gbc.gridy = 0;
+        gbc.weighty = 0.05;
+        frame.add(headingLabel, gbc);
+
+        // Instruction label
+        JLabel instructionLabel = new JLabel("Hover over each button for more details", SwingConstants.CENTER);
+        instructionLabel.setFont(instructionFont);
+        gbc.gridy = 1;
+        frame.add(instructionLabel, gbc);
+
+        // Manage Products button
         JButton manageProductsButton = new JButton("Manage Products");
-        manageProductsButton.setToolTipText("Add, view, or remove products in your shop"); 
-        manageProductsButton.setFont(buttonFont); 
-        gbc.gridy=0; // This sets the grid y position for the grid bag constraints
-        frame.add(manageProductsButton, gbc); // This adds the button to the frame with the grid bag constraints
+        manageProductsButton.setToolTipText("Add, view, or remove products in your shop");
+        manageProductsButton.setFont(buttonFont);
+        gbc.gridy = 2;
+        gbc.weighty = 0.1;
+        frame.add(manageProductsButton, gbc);
 
-        // This is to create the record sale button within the application
+        // Record Sale button
         JButton recordSaleButton = new JButton("Record Sale");
         recordSaleButton.setToolTipText("Used to record a sale in the shop");
         recordSaleButton.setFont(buttonFont);
-        gbc.gridy=1; // This sets the grid y position for the grid bag constraints
-        frame.add(recordSaleButton, gbc); // This adds the button to the frame with the grid bag constraints
+        gbc.gridy = 3;
+        frame.add(recordSaleButton, gbc);
 
-        // This is to create the generate report button within the application
+        // Generate Report button
         JButton generateReportButton = new JButton("Generate Report");
         generateReportButton.setToolTipText("Used to generate a report of sales and inventory");
         generateReportButton.setFont(buttonFont);
-        gbc.gridy=2; // This sets the grid y position for the grid bag constraints
-        frame.add(generateReportButton, gbc); // This adds the button to the frame with the grid bag constraints
+        gbc.gridy = 4;
+        frame.add(generateReportButton, gbc);
 
-        // This is to create an exit button within the application
+        // Exit button
         JButton exitButton = new JButton("Exit");
         exitButton.setToolTipText("Used to exit the application");
         exitButton.setFont(buttonFont);
-        gbc.gridy=3; // This sets the grid y position for the grid bag constraints
-        frame.add(exitButton, gbc); // This adds the button to the frame with the grid bag constraints
+        gbc.gridy = 5;
+        frame.add(exitButton, gbc);
 
-        frame.setVisible(true); // This line is to make the frame visible
+        frame.setVisible(true); // Show the window
 
-        // This adds functionality to the buttons allowing the user to interact and execute actions within the GUI
+        // Button actions
         manageProductsButton.addActionListener(e -> manageProducts());
         recordSaleButton.addActionListener(e -> recordSale());
         generateReportButton.addActionListener(e -> generateReport());
         exitButton.addActionListener(e -> frame.dispose());
     }
 
-    // This creates a method to manage the products within the application (add, view, and remove products)
+    // Handles the Manage Products workflow
     static void manageProducts() {
         boolean stayInManageProducts = true;
 
@@ -118,8 +134,8 @@ public class ShopManagementGUI {
                                 Product newProduct = new Product(name, price, stock);
                                 inventory.addProduct(newProduct);
                                 JOptionPane.showMessageDialog(null, "Product added successfully!");
-                                validInput = true; // input is valid, exit the inner loop
-                                inventoryWindow.refreshTable(); // This refreshes the inventory window after adding a product
+                                validInput = true;
+                                inventoryWindow.refreshTable();
                             }
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(null, "Invalid price or stock input.");
@@ -128,8 +144,8 @@ public class ShopManagementGUI {
                     break;
 
                 case 1: // View Inventory
-                    inventoryWindow.setVisible(true); // This displays the inventory window
-                    inventoryWindow.refreshTable(); // This refreshes the inventory window when viewed
+                    inventoryWindow.setVisible(true);
+                    inventoryWindow.refreshTable();
                     break;
 
                 case 2: // Remove Product
@@ -157,18 +173,18 @@ public class ShopManagementGUI {
 
                     inventory.products = updatedList.toArray(new Product[0]);
                     JOptionPane.showMessageDialog(null, "Product removed successfully!");
-                    inventoryWindow.refreshTable(); // This refreshes the inventory window after removing a product
+                    inventoryWindow.refreshTable();
                     break;
 
                 case 3: // Back
                 default:
-                    stayInManageProducts = false; // Exit the while loop
+                    stayInManageProducts = false;
                     break;
             }
         }
     }
 
-    // This allows for a method to be created to record a sale within the application
+    // Handles sale recording
     static void recordSale() {
         if (inventory.products.length == 0) {
             JOptionPane.showMessageDialog(null, "No products available to sell.");
@@ -202,7 +218,6 @@ public class ShopManagementGUI {
             int quantity = Integer.parseInt(quantityInput);
             if (quantity <= 0) {
                 JOptionPane.showMessageDialog(null, "Quantity must be greater than 0.");
-                recordSale();
                 return;
             }
             if (quantity > productToSell.getStock()) {
@@ -214,14 +229,14 @@ public class ShopManagementGUI {
                 salesManager.recordSale(sale);
                 inventory.updateStock(productToSell, productToSell.getStock() - quantity);
                 JOptionPane.showMessageDialog(null, "Sale recorded! Total: $" + sale.getTotalPrice());
-                inventoryWindow.refreshTable(); // This refreshes the inventory window after recording a sale
+                inventoryWindow.refreshTable();
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Invalid quantity input.");
         }
     }
 
-    // This is the method to generate a report of sales and inventory
+    // Generates a sales and inventory report
     static void generateReport() {
         StringBuilder sb = new StringBuilder();
 
@@ -241,25 +256,38 @@ public class ShopManagementGUI {
     }
 }
 
-// This creates a new class to handle the inventory window separately
+// InventoryWindow class with background color
 class InventoryWindow extends JFrame {
-    JTable table; // This declares a JTable to display the inventory
-    DefaultTableModel model; // This declares a DefaultTableModel to manage the table data
+    JTable table; // Table to show inventory
+    DefaultTableModel model; // Table model
 
     public InventoryWindow() {
-        setTitle("Inventory"); // This sets the title of the inventory window
-        setSize(400, 300); // This sets the size of the inventory window
-        setLayout(new BorderLayout()); // This sets the layout of the inventory window
+        setTitle("Inventory"); // Title of the window
+        setSize(400, 300); // Dimensions
+        setLayout(new BorderLayout()); // Layout manager
 
-        model = new DefaultTableModel(new Object[]{"Name", "Price", "Stock"}, 0); // This creates the table columns
-        table = new JTable(model); // This initializes the table with the model
-        add(new JScrollPane(table), BorderLayout.CENTER); // This adds the table to a scroll pane and places it in the center
+        // Set background color
+        getContentPane().setBackground(new Color(240, 248, 255)); // Light blue: AliceBlue
+
+        // Initialize table and model
+        model = new DefaultTableModel(new Object[]{"Name", "Price", "Stock"}, 0);
+        table = new JTable(model);
+        table.setBackground(Color.WHITE); // Table background
+        table.setFont(new Font("SansSerif", Font.PLAIN, 14)); // Font style
+        table.setRowHeight(22); // Row height
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.getViewport().setBackground(Color.WHITE); // Scroll pane background
+
+        add(scrollPane, BorderLayout.CENTER); // Add scrollable table to center
     }
 
+    // Updates table with current inventory
     public void refreshTable() {
-        model.setRowCount(0); // This clears the current table data
+        model.setRowCount(0); // Clear existing data
         for (Product p : ShopManagementGUI.inventory.products) {
-            model.addRow(new Object[]{p.getName(), "$" + p.getPrice(), p.getStock()}); // This adds each product to the table
+            model.addRow(new Object[]{p.getName(), "$" + p.getPrice(), p.getStock()});
         }
     }
 }
+
