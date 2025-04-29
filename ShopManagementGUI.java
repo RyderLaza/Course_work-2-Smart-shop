@@ -18,8 +18,11 @@ This file contains Java Swing components and it is the GUI of the
 Smart Shop system
 ------------------------------------------------------------
 */
+package ya;
 
 import javax.swing.*; // this is imported for GUI components
+import javax.swing.table.DefaultTableModel; // this is imported for table models
+import java.awt.*; // this is imported for layout managers
 import java.awt.event.*; // this is imported to handle events
 import java.util.ArrayList; // this is imported to use the array list class
 
@@ -27,6 +30,7 @@ public class ShopManagementGUI {
     // These are the static variables that are utilized throughout the GUI code
     static InventoryManager inventory = new InventoryManager(new Product[]{});
     static SalesManager salesManager = new SalesManager();
+    static InventoryWindow inventoryWindow = new InventoryWindow(); // This creates a separate window to view inventory
 
     public static void main(String[] args) {
         // This is to set up the main GUI frame
@@ -35,7 +39,7 @@ public class ShopManagementGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
 
-        // This is to create the manage products button to the application
+        // This is to create the manage products button within the application
         JButton manageProductsButton = new JButton("Manage Products");
         manageProductsButton.setBounds(100, 50, 200, 40);
         frame.add(manageProductsButton);
@@ -50,7 +54,7 @@ public class ShopManagementGUI {
         generateReportButton.setBounds(100, 190, 200, 40);
         frame.add(generateReportButton);
 
-        // this is to create an exit button within the application
+        // This is to create an exit button within the application
         JButton exitButton = new JButton("Exit");
         exitButton.setBounds(100, 260, 200, 40);
         frame.add(exitButton);
@@ -97,6 +101,7 @@ public class ShopManagementGUI {
                                 inventory.addProduct(newProduct);
                                 JOptionPane.showMessageDialog(null, "Product added successfully!");
                                 validInput = true; // input is valid, exit the inner loop
+                                inventoryWindow.refreshTable(); // This refreshes the inventory window after adding a product
                             }
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(null, "Invalid price or stock input.");
@@ -105,16 +110,8 @@ public class ShopManagementGUI {
                     break;
 
                 case 1: // View Inventory
-                    StringBuilder sb = new StringBuilder();
-                    for (Product p : inventory.products) {
-                        sb.append(p.getName())
-                                .append(" - $")
-                                .append(p.getPrice())
-                                .append(" - Stock: ")
-                                .append(p.getStock())
-                                .append("\n");
-                    }
-                    JOptionPane.showMessageDialog(null, sb.length() > 0 ? sb.toString() : "No products in inventory.");
+                    inventoryWindow.setVisible(true); // This displays the inventory window
+                    inventoryWindow.refreshTable(); // This refreshes the inventory window when viewed
                     break;
 
                 case 2: // Remove Product
@@ -142,6 +139,7 @@ public class ShopManagementGUI {
 
                     inventory.products = updatedList.toArray(new Product[0]);
                     JOptionPane.showMessageDialog(null, "Product removed successfully!");
+                    inventoryWindow.refreshTable(); // This refreshes the inventory window after removing a product
                     break;
 
                 case 3: // Back
@@ -159,19 +157,16 @@ public class ShopManagementGUI {
             return;
         }
 
-        // This builds a list of product names to be displayed in the dialog box for the user to select from
         String[] productNames = new String[inventory.products.length];
         for (int i = 0; i < inventory.products.length; i++) {
             productNames[i] = inventory.products[i].getName();
         }
 
-        // This allows the user to select a product from the list of products in the inventory to sell
         String selectedProduct = (String) JOptionPane.showInputDialog(null, "Select a product:",
                 "Record Sale", JOptionPane.QUESTION_MESSAGE, null, productNames, productNames[0]);
 
         if (selectedProduct == null) return;
 
-        // This finds the selected product in the inventory
         Product productToSell = null;
         for (Product p : inventory.products) {
             if (p.getName().equals(selectedProduct)) {
@@ -182,12 +177,11 @@ public class ShopManagementGUI {
 
         if (productToSell == null) return;
 
-        // This prompts the user to enter the quantity of the selected product to sell
         String quantityInput = JOptionPane.showInputDialog("Enter quantity to sell:");
         if (quantityInput == null) return;
 
         try {
-            int quantity = Integer.parseInt(quantityInput); // This displays a message if there is not enough stock available for the selected product
+            int quantity = Integer.parseInt(quantityInput);
             if (quantity <= 0) {
                 JOptionPane.showMessageDialog(null, "Quantity must be greater than 0.");
                 recordSale();
@@ -200,9 +194,9 @@ public class ShopManagementGUI {
                 int[] quantities = {quantity};
                 SalesRecord sale = new SalesRecord(soldProducts, "Today", quantities);
                 salesManager.recordSale(sale);
-                // This updates the inventory stock after a sale is recorded
                 inventory.updateStock(productToSell, productToSell.getStock() - quantity);
                 JOptionPane.showMessageDialog(null, "Sale recorded! Total: $" + sale.getTotalPrice());
+                inventoryWindow.refreshTable(); // This refreshes the inventory window after recording a sale
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Invalid quantity input.");
@@ -212,7 +206,7 @@ public class ShopManagementGUI {
     // This is the method to generate a report of sales and inventory
     static void generateReport() {
         StringBuilder sb = new StringBuilder();
-        // This loops through the sales records and appends the details to the report
+
         sb.append("Sales Report:\n");
         for (SalesRecord record : salesManager.salesRecords) {
             if (record != null) {
@@ -226,5 +220,28 @@ public class ShopManagementGUI {
         }
 
         JOptionPane.showMessageDialog(null, sb.length() > 0 ? sb.toString() : "No data to display.");
+    }
+}
+
+// This creates a new class to handle the inventory window separately
+class InventoryWindow extends JFrame {
+    JTable table; // This declares a JTable to display the inventory
+    DefaultTableModel model; // This declares a DefaultTableModel to manage the table data
+
+    public InventoryWindow() {
+        setTitle("Inventory"); // This sets the title of the inventory window
+        setSize(400, 300); // This sets the size of the inventory window
+        setLayout(new BorderLayout()); // This sets the layout of the inventory window
+
+        model = new DefaultTableModel(new Object[]{"Name", "Price", "Stock"}, 0); // This creates the table columns
+        table = new JTable(model); // This initializes the table with the model
+        add(new JScrollPane(table), BorderLayout.CENTER); // This adds the table to a scroll pane and places it in the center
+    }
+
+    public void refreshTable() {
+        model.setRowCount(0); // This clears the current table data
+        for (Product p : ShopManagementGUI.inventory.products) {
+            model.addRow(new Object[]{p.getName(), "$" + p.getPrice(), p.getStock()}); // This adds each product to the table
+        }
     }
 }
