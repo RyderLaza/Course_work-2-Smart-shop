@@ -18,7 +18,7 @@ This file contains Java Swing components and it is the GUI of the
 Smart Shop system
 ------------------------------------------------------------
 */
-package ya;
+
 
 import javax.swing.*; // this is imported for GUI components
 import javax.swing.table.DefaultTableModel; // this is imported for table models
@@ -35,29 +35,47 @@ public class ShopManagementGUI {
     public static void main(String[] args) {
         // This is to set up the main GUI frame
         JFrame frame = new JFrame("Shop Management System");
-        frame.setSize(400, 400);
+        frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(null);
+        frame.setLayout(new GridBagLayout());
+        frame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH; // This sets the fill property for the grid bag constraints
+        gbc.insets = new Insets(15, 40, 15, 40); // This sets the insets for the grid bag constraints
+        gbc.gridx = 0; // This sets the grid x position for the grid bag constraints
+        gbc.weightx = 1.0; // This sets the weight x for the grid bag constraints
+        gbc.weighty = 0.1; // This sets the weight y for the grid bag constraints
+
+        Font buttonFont = new Font("Roboto", Font.BOLD, 18); // This creates a font for the buttons
 
         // This is to create the manage products button within the application
         JButton manageProductsButton = new JButton("Manage Products");
-        manageProductsButton.setBounds(100, 50, 200, 40);
-        frame.add(manageProductsButton);
+        manageProductsButton.setToolTipText("Add, view, or remove products in your shop"); 
+        manageProductsButton.setFont(buttonFont); 
+        gbc.gridy=0; // This sets the grid y position for the grid bag constraints
+        frame.add(manageProductsButton, gbc); // This adds the button to the frame with the grid bag constraints
 
         // This is to create the record sale button within the application
         JButton recordSaleButton = new JButton("Record Sale");
-        recordSaleButton.setBounds(100, 120, 200, 40);
-        frame.add(recordSaleButton);
+        recordSaleButton.setToolTipText("Used to record a sale in the shop");
+        recordSaleButton.setFont(buttonFont);
+        gbc.gridy=1; // This sets the grid y position for the grid bag constraints
+        frame.add(recordSaleButton, gbc); // This adds the button to the frame with the grid bag constraints
 
         // This is to create the generate report button within the application
         JButton generateReportButton = new JButton("Generate Report");
-        generateReportButton.setBounds(100, 190, 200, 40);
-        frame.add(generateReportButton);
+        generateReportButton.setToolTipText("Used to generate a report of sales and inventory");
+        generateReportButton.setFont(buttonFont);
+        gbc.gridy=2; // This sets the grid y position for the grid bag constraints
+        frame.add(generateReportButton, gbc); // This adds the button to the frame with the grid bag constraints
 
         // This is to create an exit button within the application
         JButton exitButton = new JButton("Exit");
-        exitButton.setBounds(100, 260, 200, 40);
-        frame.add(exitButton);
+        exitButton.setToolTipText("Used to exit the application");
+        exitButton.setFont(buttonFont);
+        gbc.gridy=3; // This sets the grid y position for the grid bag constraints
+        frame.add(exitButton, gbc); // This adds the button to the frame with the grid bag constraints
 
         frame.setVisible(true); // This line is to make the frame visible
 
