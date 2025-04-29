@@ -256,7 +256,7 @@ public class ShopManagementGUI {
     }
 }
 
-// InventoryWindow class with background color
+// InventoryWindow class with no background color set
 class InventoryWindow extends JFrame {
     JTable table; // Table to show inventory
     DefaultTableModel model; // Table model
@@ -266,13 +266,10 @@ class InventoryWindow extends JFrame {
         setSize(400, 300); // Dimensions
         setLayout(new BorderLayout()); // Layout manager
 
-        // Set background color
-        getContentPane().setBackground(new Color(240, 248, 255)); // Light blue: AliceBlue
-
         // Initialize table and model
         model = new DefaultTableModel(new Object[]{"Name", "Price", "Stock"}, 0);
         table = new JTable(model);
-        table.setBackground(Color.WHITE); // Table background
+        table.setBackground(Color.WHITE); // Table background for readability
         table.setFont(new Font("SansSerif", Font.PLAIN, 14)); // Font style
         table.setRowHeight(22); // Row height
 
