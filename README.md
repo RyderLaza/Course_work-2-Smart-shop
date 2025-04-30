@@ -32,3 +32,4 @@ and a menu of features will pop up which will allow you to: <br>
 *manage products (add and remove) <br>
 *create sales records <br>
 *generate sales reports <br>
+*Exit program
