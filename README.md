@@ -17,14 +17,14 @@ It allows users to add, update, and remove products, record sales transactions, 
 The GUI follows usability principles, providing clear prompts, intuitive navigation, and feedback to ensure a smooth user experience.
 
 ## Contributors ## 
-The code was created in a collaborative enviroment of 6 people which are:
+The code was created in a collaborative enviroment of 6 people which are: <br/>
 
-Di’light Sarah Olisah – 26117363 (Project manager \br
-Charlie Ryder - 26186781 (Document lead) \br
-Harley Webster – 26084678 (Designer) \br
-Josh Bell - 26174804 (Tester) \br
-Paul Nyamwela - 26126796 (Lead developer /br
-Dylan Clarke - 26115999 (PowerPoint lead) /br
+Di’light Sarah Olisah – 26117363 (Project manager) <br/>
+Charlie Ryder - 26186781 (Document lead) <br/>
+Harley Webster – 26084678 (Designer) <br/>
+Josh Bell - 26174804 (Tester) <br/>
+Paul Nyamwela - 26126796 (Lead developer) <br/>
+Dylan Clarke - 26115999 (PowerPoint lead) <br/>
 
 ## How To Run ##
 To run this project you will need to run the ShopManagmentGUI.java file
