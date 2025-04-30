@@ -1,6 +1,6 @@
 Link: https://github.com/RyderLaza/Course_work-2-Smart-shop
 
-Java version: Java 8
+Java version: Java 24
 ## Required libraries ##
 java.util.*; // importing the java util package for using arrays and other data structures <br/>
 javax.swing.*; // GUI components <br/>
