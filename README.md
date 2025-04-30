@@ -28,7 +28,7 @@ Dylan Clarke - 26115999 (Lead developer) <br/>
 
 ## How To Run ##
 To run this project you will need to run the ShopManagmentGUI.java file
-and a menu of features will pop up which will allow you to:
-*manage products (add and remove) 
-*create sales records 
-*generate sales reports
+and a menu of features will pop up which will allow you to: <br>
+*manage products (add and remove) <br>
+*create sales records <br>
+*generate sales reports <br>
