@@ -14,6 +14,7 @@ import java.util.*; // importing the java util package for using arrays and othe
 
 //Product class
 class Product {
+    //Atributes for the product class
     public String name; //product name
     public double price; // product price
     public int stock; // product stock
@@ -40,7 +41,7 @@ class Product {
 
 // sales manager class
 class SalesManager {
-
+    //Atributes for Sales manager class
     public SalesRecord[] salesRecords; // array of sales records
     public int index; // index for the sales records
 
@@ -55,13 +56,14 @@ class SalesManager {
     }
 
     public void generateSalesReport(){
-        //I have no clue what yous want doing with this
+        //Method not utilised by the proggram
     }
 
 }
 
 //sales record class
 class SalesRecord {
+    //Atributes for SalesRecord object
     public Product[] products;
     public String date;
     public int[] quantitySold;
@@ -94,6 +96,7 @@ class SalesRecord {
 
 //inventory manager class
 class InventoryManager {
+    //Atributes for the InventoryManager class
     Product[] products = new Product[1]; //initialises the product list to a size of 1
 
     // constructor for inventory manager
@@ -114,6 +117,11 @@ class InventoryManager {
 
     // Method to add a product to the inventory
     public void addProduct(Product product) {
+        /*Description
+        Creates a temporary list that stores the current products 
+        Re-defines the product list as an empty list with a greater size
+        All items are then added into the new product list 
+        */
         Product[] tempList = this.products;
         this.products = new Product[tempList.length + 1];
         for (int i = 0; i < tempList.length; i++) {
