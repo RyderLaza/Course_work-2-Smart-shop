@@ -23,8 +23,8 @@ Di’light Sarah Olisah – 26117363 (Project manager) <br/>
 Charlie Ryder - 26186781 (Document lead) <br/>
 Harley Webster – 26084678 (Designer) <br/>
 Josh Bell - 26174804 (Tester) <br/>
-Paul Nyamwela - 26126796 (Lead developer) <br/>
-Dylan Clarke - 26115999 (PowerPoint lead) <br/>
+Paul Nyamwela - 26126796 (PowerPoint lead) <br/>
+Dylan Clarke - 26115999 (Lead developer) <br/>
 
 ## How To Run ##
 To run this project you will need to run the ShopManagmentGUI.java file
