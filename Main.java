@@ -120,25 +120,31 @@ class InventoryManager {
         /*Description
         Creates a temporary list that stores the current products 
         Re-defines the product list as an empty list with a greater size
-        All items are then added into the new product list 
+        All items are then added into the new product list with a for loop to add the original products back 
+        and finnaly the new item is added
         */
-        Product[] tempList = this.products;
-        this.products = new Product[tempList.length + 1];
+        Product[] tempList = this.products;// temp list to store all previous producs while they are added back to the new list
+        this.products = new Product[tempList.length + 1];//adds 1 to the size of the list when the new one is created
         for (int i = 0; i < tempList.length; i++) {
-            this.products[i] = tempList[i];
+            this.products[i] = tempList[i];//adds the current item back to the list 
         }
-        this.products[this.products.length-1] = product;
+        this.products[this.products.length-1] = product;//adds the final/new product into the new list 
     }
 
     // Method to remove a product from the inventory
     public void removeProduct(Product product) {
-        Product[] tempList = this.products;
-        this.products = new Product[tempList.length - 1];
-        int currentIndex = 0;
+        /*
+        Creates a temporary list that stores the current products 
+        then the products atribute is assigned as an empty array of products that is shorter than the original 
+        then a for loop adds the item back into the new product list if the item isn't equal to the product being removed
+        */
+        Product[] tempList = this.products;//temp list to keep all products in wile they are being added back or removed
+        this.products = new Product[tempList.length - 1];//takes away the size by one of the new list
+        int currentIndex = 0;//current index variable to be used for the new products list so that no array index errors occur
         for (int i = 0; i < tempList.length; i++) {
-            if (tempList[i] != product) {
-                this.products[currentIndex] = tempList[i];
-                currentIndex++;
+            if (tempList[i] != product) {//checks that the current item isn't equal to the one being removed
+                this.products[currentIndex] = tempList[i];//adds item back to products list
+                currentIndex++;//increments the index by 1
             }
         }
     }
