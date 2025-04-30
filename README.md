@@ -2,12 +2,12 @@ Link: https://github.com/RyderLaza/Course_work-2-Smart-shop
 
 Java version: Java 8
 ## Required libraries ##
-java.util.*; // importing the java util package for using arrays and other data structures
-javax.swing.*; // GUI components
-javax.swing.table.DefaultTableModel; // Table models
-java.awt.*; // Layout and color handling
-java.awt.event.*; // Event handling
-java.util.ArrayList; // ArrayList for dynamic lists
+java.util.*; // importing the java util package for using arrays and other data structures <br/>
+javax.swing.*; // GUI components <br/>
+javax.swing.table.DefaultTableModel; // Table models <br/>
+java.awt.*; // Layout and color handling <br/>
+java.awt.event.*; // Event handling <br/>
+java.util.ArrayList; // ArrayList for dynamic lists <br/>
 
 
 ## Description ##
