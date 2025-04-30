@@ -1,3 +1,6 @@
+Link: https://github.com/RyderLaza/Course_work-2-Smart-shop
+
+
 This is a simple Java Swing application designed to simplify inventory and sales management.
 The system features a user-friendly GUI for interacting with the inventory and sales records.
 It allows users to add, update, and remove products, record sales transactions, automatically update stock levels, and generate both sales and inventory reports.
