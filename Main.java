@@ -156,13 +156,13 @@ public class Main {
     public static void main(String[] args) {
 
         //code for testing
-        Product banana =  new Product("Banana", 100.0, 0);//the price was auto-fill but goddamn that's expensive
-        Product apple =  new Product("Apple", 100.0, 1); // same again wth
-        Product[] ps = {banana};
-        InventoryManager inventory = new InventoryManager(ps);
-        inventory.addProduct(apple);
-        System.out.println(Arrays.toString(inventory.products));
-        inventory.removeProduct(banana);
-        System.out.println(Arrays.toString(inventory.products));
+        Product banana =  new Product("Banana", 100.0, 0);
+        Product apple =  new Product("Apple", 100.0, 1); //creates 2 different products for testing purposes
+        Product[] ps = {banana};// creating a list of products
+        InventoryManager inventory = new InventoryManager(ps);//initialising the inventory manager object with a product list containing bananas
+        inventory.addProduct(apple);//adding apples to the list to test if it works
+        System.out.println(Arrays.toString(inventory.products));//outputs the current list so i can see the changes
+        inventory.removeProduct(banana);//removes the banana product object 
+        System.out.println(Arrays.toString(inventory.products));//outputs the changes 
     }
 } // end main class
