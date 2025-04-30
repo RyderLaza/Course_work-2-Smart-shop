@@ -1,4 +1,4 @@
-Link: https://github.com/RyderLaza/Course_work-2-Smart-shop
+Link: [https://github.com/RyderLaza/Course_work-2-Smart-shop](https://github.com/RyderLaza/Course_work-2-Smart-shop.git)
 
 Java version: Java 24
 ## Required libraries ##
